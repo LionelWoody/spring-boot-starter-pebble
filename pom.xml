@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.woodylab.boot</groupId>
   <artifactId>spring-boot-starter-pebble</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1-SNAPSHOT</version>
   <name>Spring Boot Starter Pebble</name>
   <description>Spring Boot auto-configuration for Pebble template engine</description>
   <packaging>jar</packaging>
@@ -135,7 +135,7 @@
     <connection>scm:git:git://github.com/LionelWoody/spring-boot-starter-pebble.git</connection>
     <developerConnection>scm:git:git@github.com:LionelWoody/spring-boot-starter-pebble.git</developerConnection>
     <url>https://github.com/LionelWoody/spring-boot-starter-pebble</url>
-    <tag>v0.1.0</tag>
+    <tag>HEAD</tag>
   </scm>
   <developers>
     <developer>
