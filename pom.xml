@@ -6,6 +6,7 @@
     <version>0.1.2-SNAPSHOT</version>
     <name>Spring Boot Starter Pebble</name>
     <description>Spring Boot auto-configuration for Pebble template engine</description>
+    <url>https://github.com/LionelWoody/spring-boot-starter-pebble</url>
     <packaging>jar</packaging>
 
     <properties>
