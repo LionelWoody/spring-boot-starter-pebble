@@ -2,7 +2,7 @@ Spring Boot Starter Pebble
 ====
 
 [![Build Status](https://travis-ci.org/LionelWoody/spring-boot-starter-pebble.svg)](https://travis-ci.org/LionelWoody/spring-boot-starter-pebble)
-[![Coverage Status](https://coveralls.io/repos/LionelWoody/spring-boot-starter-pebble/badge.svg)](https://coveralls.io/repos/LionelWoody/spring-boot-starter-pebble)
+[![Coverage Status](https://coveralls.io/repos/LionelWoody/spring-boot-starter-pebble/badge.svg?branch=master&service=github)](https://coveralls.io/github/LionelWoody/spring-boot-starter-pebble?branch=master)
 
 Spring Boot Starter support for
 [Pebble](http://www.mitchellbosecke.com/pebble/home)
