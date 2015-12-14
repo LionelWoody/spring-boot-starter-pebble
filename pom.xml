@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.woodylab.boot</groupId>
     <artifactId>spring-boot-starter-pebble</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.1</version>
     <name>Spring Boot Starter Pebble</name>
     <description>Spring Boot auto-configuration for Pebble template engine</description>
     <packaging>jar</packaging>
@@ -165,7 +164,7 @@
         <connection>scm:git:git://github.com/LionelWoody/spring-boot-starter-pebble.git</connection>
         <developerConnection>scm:git:git@github.com:LionelWoody/spring-boot-starter-pebble.git</developerConnection>
         <url>https://github.com/LionelWoody/spring-boot-starter-pebble</url>
-        <tag>HEAD</tag>
+        <tag>v0.1.1</tag>
     </scm>
     <developers>
         <developer>
