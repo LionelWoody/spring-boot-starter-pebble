@@ -1,5 +1,6 @@
 package org.woodylab.boot.pebble.autoconfigure;
 
+import org.springframework.boot.autoconfigure.template.AbstractViewResolverProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -8,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author <a href="mailto:javaworld@qq.com">Woody</a> @ 15-12-11 下午10:31.
  */
 @ConfigurationProperties(prefix = "spring.pebble")
-public class PebbleProperties {
+public class PebbleProperties extends AbstractViewResolverProperties {
 
     public static final String DEFAULT_PREFIX = "classpath:/templates/";
 
@@ -18,11 +19,7 @@ public class PebbleProperties {
 
     private String suffix = DEFAULT_SUFFIX;
 
-    private String contentType = "text/html";
-
-    private String charSet = "utf-8";
-
-    private String[] viewNames;
+    private int cacheSize = 200;
 
     public String getPrefix() {
         return this.prefix;
@@ -40,27 +37,11 @@ public class PebbleProperties {
         this.suffix = suffix;
     }
 
-    public String getContentType() {
-        return contentType;
+    public int getCacheSize() {
+        return cacheSize;
     }
 
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public String getCharSet() {
-        return charSet;
-    }
-
-    public void setCharSet(String charSet) {
-        this.charSet = charSet;
-    }
-
-    public String[] getViewNames() {
-        return viewNames;
-    }
-
-    public void setViewNames(String[] viewNames) {
-        this.viewNames = viewNames;
+    public void setCacheSize(int cacheSize) {
+        this.cacheSize = cacheSize;
     }
 }

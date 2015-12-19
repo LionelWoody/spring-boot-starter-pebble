@@ -16,3 +16,5 @@ buildNumber.properties
 .project
 .settings/
 .springBeans
+*.log
+logs/

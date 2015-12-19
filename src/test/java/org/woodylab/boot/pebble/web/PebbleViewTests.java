@@ -34,7 +34,7 @@ public class PebbleViewTests {
 
     @Test
     public void test() throws Exception {
-        PebbleView view = new PebbleView(new PebbleEngine(new StringLoader()).getTemplate("Hello {{msg}}"));
+        PebbleView view = new PebbleView(new PebbleEngine.Builder().loader(new StringLoader()).build().getTemplate("Hello {{msg}}"));
         view.setApplicationContext(context);
         view.render(Collections.singletonMap("msg", "World"), request , response);
         assertEquals("Hello World", response.getContentAsString());

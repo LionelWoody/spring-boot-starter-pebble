@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
  * Created by <a href="mailto:javaworld@qq.com">Woody</a> @ 15-12-12 下午10:03.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = RestApplicationTests.Application.class)
+@SpringApplicationConfiguration(classes = {RestApplicationTests.Application.class, CustomPebbleExtension.class})
 @IntegrationTest("server.port:0")
 @WebAppConfiguration
 public class RestApplicationTests {
@@ -54,6 +54,13 @@ public class RestApplicationTests {
     }
 
 
+    @Test
+    public void testExtension() throws Exception {
+        String body = new TestRestTemplate().getForObject("http://localhost:" + port +
+                "/foo", String.class);
+        assertTrue(body.contains("success"));
+    }
+
     @Configuration
     @EnableAutoConfiguration
     @Controller
@@ -73,6 +80,11 @@ public class RestApplicationTests {
             model.put("message", "Hello World");
             model.put("title", "Hello App");
             return "partial";
+        }
+
+        @RequestMapping("/foo")
+        public String foo() {
+            return "foo";
         }
 
         public static void main(String[] args) {

@@ -2,6 +2,7 @@ package org.woodylab.boot.pebble;
 
 import com.mitchellbosecke.pebble.error.LoaderException;
 import com.mitchellbosecke.pebble.loader.Loader;
+import com.mitchellbosecke.pebble.utils.PathUtils;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -15,7 +16,7 @@ import java.io.Reader;
  *
  * @author <a href="mailto:javaworld@qq.com">Woody</a> @ 15-12-11 下午5:26.
  */
-public class PebbleTemplateLoader implements Loader, ResourceLoaderAware {
+public class PebbleTemplateLoader implements Loader<String>, ResourceLoaderAware {
 
     private ResourceLoader resourceLoader;
 
@@ -72,6 +73,16 @@ public class PebbleTemplateLoader implements Loader, ResourceLoaderAware {
     @Override
     public void setSuffix(String suffix) {
         this.suffix = suffix;
+    }
+
+    @Override
+    public String resolveRelativePath(String relativePath, String anchorPath) {
+        return PathUtils.resolveRelativePath(relativePath, anchorPath);
+    }
+
+    @Override
+    public String createCacheKey(String templateName) {
+        return templateName;
     }
 
 
