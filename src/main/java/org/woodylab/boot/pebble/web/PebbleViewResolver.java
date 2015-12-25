@@ -2,7 +2,6 @@ package org.woodylab.boot.pebble.web;
 
 import com.mitchellbosecke.pebble.PebbleEngine;
 import com.mitchellbosecke.pebble.error.PebbleException;
-import com.mitchellbosecke.pebble.template.PebbleTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.View;
@@ -33,18 +32,9 @@ public class PebbleViewResolver extends AbstractTemplateViewResolver implements 
     }
 
     @Override
-    protected View loadView(String viewName, Locale locale) {
+    protected View loadView(String viewName, Locale locale) throws PebbleException {
 
-        PebbleTemplate template = null;
-        try {
-            template = pebbleEngine.getTemplate(viewName);
-        } catch (PebbleException e) {
-            log.warn("拆了硬盘也没找到你要的‘{}’", viewName);
-        }
-        if (template == null) {
-            return null;
-        }
-        PebbleView view = new PebbleView(template);
+        PebbleView view = new PebbleView(pebbleEngine.getTemplate(viewName));
         view.setApplicationContext(getApplicationContext());
         view.setServletContext(getServletContext());
 
