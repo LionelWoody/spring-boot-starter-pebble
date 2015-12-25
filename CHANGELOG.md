@@ -1,3 +1,6 @@
+## v0.2.1(2015-12-25)
+- bug fix: expose render exception
+
 ## v0.2.0(2015-12-19)
 - follow spring-boot to 1.3.1.RELEASE
 - follow pebble to 2.0.0
