@@ -34,6 +34,10 @@ public class PebbleViewResolver extends AbstractTemplateViewResolver implements 
     @Override
     protected View loadView(String viewName, Locale locale) throws PebbleException {
 
+        // Spring 有时候会私自给 viewName 加尾巴，我斩～～
+        if(viewName.endsWith(".html")) {
+            viewName = viewName.substring(0, viewName.length()-5);
+        }
         PebbleView view = new PebbleView(pebbleEngine.getTemplate(viewName));
         view.setApplicationContext(getApplicationContext());
         view.setServletContext(getServletContext());
