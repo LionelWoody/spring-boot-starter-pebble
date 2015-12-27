@@ -1,5 +1,7 @@
 ## v0.2.1(2015-12-25)
 - bug fix: expose render exception
+- strip spring added suffix ".html"
+- add more loader.
 
 ## v0.2.0(2015-12-19)
 - follow spring-boot to 1.3.1.RELEASE
