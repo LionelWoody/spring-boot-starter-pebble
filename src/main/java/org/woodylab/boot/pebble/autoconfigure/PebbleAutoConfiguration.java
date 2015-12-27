@@ -1,6 +1,10 @@
 package org.woodylab.boot.pebble.autoconfigure;
 
 import com.mitchellbosecke.pebble.PebbleEngine;
+import com.mitchellbosecke.pebble.loader.ClasspathLoader;
+import com.mitchellbosecke.pebble.loader.DelegatingLoader;
+import com.mitchellbosecke.pebble.loader.FileLoader;
+import com.mitchellbosecke.pebble.loader.Loader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -25,6 +29,9 @@ import org.woodylab.boot.pebble.PebbleTemplateLoader;
 import org.woodylab.boot.pebble.web.PebbleViewResolver;
 
 import javax.annotation.PostConstruct;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
 
@@ -122,7 +129,12 @@ public class PebbleAutoConfiguration {
             loader.setResourceLoader(new ServletContextResourceLoader(context.getServletContext()));
             loader.setPrefix(this.properties.getPrefix());
             loader.setSuffix(this.properties.getSuffix());
-            pebbleEngineConfigurer.setLoader(loader);
+            List<Loader<?>> list = new ArrayList<>();
+            list.add(loader);
+            list.add(new ClasspathLoader());
+            list.add(new FileLoader());
+            DelegatingLoader loaderAll = new DelegatingLoader(list);
+            pebbleEngineConfigurer.setLoader(loaderAll);
             pebbleEngineConfigurer.setCache(this.properties.isCache());
             pebbleEngineConfigurer.setCacheSize(this.properties.getCacheSize());
             return pebbleEngineConfigurer.getPebbleEngine();
