@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.woodylab.boot:spring-boot-starter-pebble:0.2.1'
+    compile 'org.woodylab.boot:spring-boot-starter-pebble:0.2.2'
 }
 ```
 

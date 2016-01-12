@@ -38,7 +38,7 @@ public class PebbleViewResolver extends AbstractTemplateViewResolver implements 
         if(viewName.endsWith(".html")) {
             viewName = viewName.substring(0, viewName.length()-5);
         }
-        PebbleView view = new PebbleView(pebbleEngine.getTemplate(viewName));
+        PebbleView view = new PebbleView(pebbleEngine, viewName);
         view.setApplicationContext(getApplicationContext());
         view.setServletContext(getServletContext());
 

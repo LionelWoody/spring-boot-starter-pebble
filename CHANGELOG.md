@@ -1,3 +1,6 @@
+## v0.2.2(2016-01-12)
+- bug fix: spring.pebble.cache=false can't work.
+
 ## v0.2.1(2015-12-25)
 - bug fix: expose render exception
 - strip spring added suffix ".html"

@@ -1,7 +1,7 @@
 package org.woodylab.boot.pebble.web;
 
+import com.mitchellbosecke.pebble.PebbleEngine;
 import com.mitchellbosecke.pebble.error.PebbleException;
-import com.mitchellbosecke.pebble.template.PebbleTemplate;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.AbstractTemplateView;
 
@@ -18,10 +18,12 @@ import java.util.Map;
  */
 public class PebbleView extends AbstractTemplateView {
 
-    private final PebbleTemplate template;
+    private PebbleEngine engine;
+    private String viewName;
 
-    public PebbleView(PebbleTemplate template) {
-        this.template = template;
+    public PebbleView(PebbleEngine engine, String viewName) {
+        this.engine = engine;
+        this.viewName = viewName;
     }
 
     @Override
@@ -33,9 +35,11 @@ public class PebbleView extends AbstractTemplateView {
 
         final Writer writer = response.getWriter();
         try {
-            template.evaluate(writer, model, RequestContextUtils.getLocale(request));
+            engine.getTemplate(viewName).evaluate(writer, model, RequestContextUtils.getLocale(request));
         } finally {
-            writer.flush();
+            try {
+                writer.flush();
+            } catch (IOException ignore) {}
         }
     }
 
