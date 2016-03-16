@@ -7,6 +7,7 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -77,7 +78,7 @@ public class PebbleTemplateLoader implements Loader<String>, ResourceLoaderAware
 
     @Override
     public String resolveRelativePath(String relativePath, String anchorPath) {
-        return PathUtils.resolveRelativePath(relativePath, anchorPath);
+        return PathUtils.resolveRelativePath(relativePath, anchorPath, File.separatorChar);
     }
 
     @Override
