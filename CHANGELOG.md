@@ -1,3 +1,8 @@
+## v0.2.3(2016-03-17)
+- follow spring-boot to 1.3.3.RELEASE
+- follow pebble to 2.2.0
+- template inheritance tested
+
 ## v0.2.2(2016-01-12)
 - bug fix: spring.pebble.cache=false can't work.
 
