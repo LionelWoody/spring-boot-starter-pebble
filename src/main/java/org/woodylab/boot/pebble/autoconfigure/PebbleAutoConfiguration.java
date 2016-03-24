@@ -32,7 +32,10 @@ import javax.annotation.PostConstruct;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import static java.util.Objects.nonNull;
+import static org.springframework.core.Ordered.LOWEST_PRECEDENCE;
 import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
 
 /**
@@ -57,7 +60,7 @@ public class PebbleAutoConfiguration {
     @PostConstruct
     public void checkTemplateLocationExists() {
         if (this.properties.isCheckTemplateLocation()) {
-            TemplateLocation location = new TemplateLocation(this.properties.getPrefix());
+            final TemplateLocation location = new TemplateLocation(this.properties.getPrefix());
             if (!location.exists(this.applicationContext)) {
                 logger.warn("Cannot find template location: " + location
                         + " (please add some templates, check your Pebble "
@@ -89,8 +92,8 @@ public class PebbleAutoConfiguration {
 
                 @Override
                 public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-                    PebbleExtension annotation = findAnnotation(bean.getClass(), PebbleExtension.class);
-                    if (annotation != null) {
+                    final PebbleExtension annotation = findAnnotation(bean.getClass(), PebbleExtension.class);
+                    if (nonNull(annotation)) {
                         pebbleEngineConfigurer.registerExtension(bean);
                     }
                     return bean;
@@ -106,7 +109,7 @@ public class PebbleAutoConfiguration {
 
         @Bean
         @ConditionalOnMissingBean(PebbleEngine.class)
-        public PebbleEngine pebbleEngine(PebbleEngineConfigurer pebbleEngineConfigurer) {
+        public PebbleEngine pebbleEngine(final PebbleEngineConfigurer pebbleEngineConfigurer) {
             pebbleEngineConfigurer.setCache(this.properties.isCache());
             pebbleEngineConfigurer.setCacheSize(this.properties.getCacheSize());
             return pebbleEngineConfigurer.getPebbleEngine();
@@ -124,32 +127,35 @@ public class PebbleAutoConfiguration {
 
         @Bean
         @ConditionalOnMissingBean(PebbleEngine.class)
-        public PebbleEngine pebbleEngine(PebbleEngineConfigurer pebbleEngineConfigurer) {
-            PebbleTemplateLoader loader = new PebbleTemplateLoader();
+        public PebbleEngine pebbleEngine(final PebbleEngineConfigurer pebbleEngineConfigurer) {
+            final PebbleTemplateLoader loader = new PebbleTemplateLoader();
             loader.setResourceLoader(new ServletContextResourceLoader(context.getServletContext()));
             loader.setPrefix(this.properties.getPrefix());
             loader.setSuffix(this.properties.getSuffix());
-            List<Loader<?>> list = new ArrayList<>();
+
+            final List<Loader<?>> list = new ArrayList<>();
             list.add(loader);
             list.add(new ClasspathLoader());
             list.add(new FileLoader());
-            DelegatingLoader loaderAll = new DelegatingLoader(list);
+
+            final DelegatingLoader loaderAll = new DelegatingLoader(list);
             pebbleEngineConfigurer.setLoader(loaderAll);
             pebbleEngineConfigurer.setCache(this.properties.isCache());
             pebbleEngineConfigurer.setCacheSize(this.properties.getCacheSize());
+
             return pebbleEngineConfigurer.getPebbleEngine();
         }
 
         @Bean
         @ConditionalOnMissingBean(PebbleViewResolver.class)
         public PebbleViewResolver pebbleViewResolver(final PebbleEngine pebbleEngine) {
-            PebbleViewResolver resolver = new PebbleViewResolver();
+            final PebbleViewResolver resolver = new PebbleViewResolver();
             resolver.setPrefix(this.properties.getPrefix());
             resolver.setSuffix(this.properties.getSuffix());
             resolver.setViewNames(this.properties.getViewNames());
             resolver.setContentType(this.properties.getContentType().toString());
             resolver.setPebbleEngine(pebbleEngine);
-            resolver.setOrder(Ordered.LOWEST_PRECEDENCE - 10);
+            resolver.setOrder(LOWEST_PRECEDENCE - 10);
             return resolver;
         }
 

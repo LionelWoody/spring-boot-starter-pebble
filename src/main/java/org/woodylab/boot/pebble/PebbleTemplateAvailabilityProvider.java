@@ -12,12 +12,13 @@ import static org.woodylab.boot.pebble.autoconfigure.PebbleProperties.DEFAULT_SU
  */
 public class PebbleTemplateAvailabilityProvider implements TemplateAvailabilityProvider {
     @Override
-    public boolean isTemplateAvailable(String view, Environment environment, ClassLoader classLoader, ResourceLoader resourceLoader) {
+    public boolean isTemplateAvailable(final String view, final Environment environment,
+                                       final ClassLoader classLoader, final ResourceLoader resourceLoader) {
         if (!isPresent("com.mitchellbosecke.pebble.PebbleEngine", classLoader)) {
             return false;
         }
-        String prefix = environment.getProperty("spring.pebble.prefix", DEFAULT_PREFIX);
-        String suffix = environment.getProperty("spring.pebble.suffix", DEFAULT_SUFFIX);
+        final String prefix = environment.getProperty("spring.pebble.prefix", DEFAULT_PREFIX);
+        final String suffix = environment.getProperty("spring.pebble.suffix", DEFAULT_SUFFIX);
 
         return resourceLoader.getResource(prefix + view + suffix).exists();
     }

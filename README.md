@@ -1,6 +1,6 @@
 Spring Boot Starter Pebble
 ====
-
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.woodylab.boot/spring-boot-starter-pebble/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.woodylab.boot/spring-boot-starter-pebble)
 [![Build Status](https://travis-ci.org/LionelWoody/spring-boot-starter-pebble.svg)](https://travis-ci.org/LionelWoody/spring-boot-starter-pebble)
 [![Coverage Status](https://coveralls.io/repos/LionelWoody/spring-boot-starter-pebble/badge.svg?branch=master&service=github)](https://coveralls.io/github/LionelWoody/spring-boot-starter-pebble?branch=master)
 
@@ -10,7 +10,11 @@ Spring Boot Starter support for
 
 ## Usage
 
-Add `spring-boot-starter-pebble` as dependency:
+### Getting started
+
+Add `spring-boot-starter-pebble` as dependency.
+
+With _Gradle_:
 ```gradle
 repositories {
     mavenCentral()
@@ -21,7 +25,18 @@ dependencies {
 }
 ```
 
-CustomExtension supported since version 0.2.0, you can define your Extensions, simply annotation it and then you can use it in your template.
+With _Maven_:
+```xml
+<dependency>
+    <groupId>org.woodylab.boot</groupId>
+    <artifactId>spring-boot-starter-pebble</artifactId>
+    <version>0.2.3</version>
+</dependency>
+```
+
+### How to extend the library
+_CustomExtension_ is supported since version _0.2.0_. You can define your extension, simply annotation it and then you can use it in your template.
+
 ```java
 @EnableAutoConfiguration
 @PebbleExtension

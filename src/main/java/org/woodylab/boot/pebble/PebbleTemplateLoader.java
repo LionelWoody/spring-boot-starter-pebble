@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.Charset;
+
+import static java.util.Objects.nonNull;
 
 /**
  * 本想让它 Deprecated ，可是其他 Loader 都不好使，只好启用
@@ -21,70 +24,66 @@ public class PebbleTemplateLoader implements Loader<String>, ResourceLoaderAware
 
     private ResourceLoader resourceLoader;
 
-    private String charset = "UTF-8";
+    private String charset = Charset.forName("UTF-8").displayName();
 
     private String prefix;
 
     private String suffix;
 
     @Override
-    public Reader getReader(String resourceName) throws LoaderException {
-        resourceName = getFullyQualifiedResourceName(resourceName);
-        Resource resource = resourceLoader.getResource(resourceName);
+    public Reader getReader(final String resourceName) throws LoaderException {
+        final String fullyQualifiedResourceName = getFullyQualifiedResourceName(resourceName);
+        final Resource resource = resourceLoader.getResource(fullyQualifiedResourceName);
         if (resource.exists()) {
             try {
                 return new InputStreamReader(resource.getInputStream(), charset);
             } catch (IOException e) {
-                throw new LoaderException(e, "Failed to load template: " + resourceName);
+                throw new LoaderException(e, "Failed to load template: " + fullyQualifiedResourceName);
             }
         }
-        throw new LoaderException(null, "No template exists named: " + resourceName);
+        throw new LoaderException(null, "No template exists named: " + fullyQualifiedResourceName);
     }
 
     @Override
-    public void setResourceLoader(ResourceLoader resourceLoader) {
+    public void setResourceLoader(final ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 
-    private String getFullyQualifiedResourceName(String resourceName) {
-        StringBuilder result = new StringBuilder();
-        if (prefix != null) {
-            if (resourceName.startsWith(prefix)) {
-                result.append(resourceName);
-            } else {
-                result.append(prefix).append(resourceName);
-            }
+    private String getFullyQualifiedResourceName(final String resourceName) {
+        final StringBuilder result = new StringBuilder();
+        if (nonNull(prefix) && !resourceName.startsWith(prefix)) {
+            result.append(prefix);
         }
-        if (suffix != null) {
+        result.append(resourceName);
+        if (nonNull(suffix)) {
             result.append(suffix);
         }
         return result.toString();
     }
 
     @Override
-    public void setCharset(String charset) {
+    public void setCharset(final String charset) {
         this.charset = charset;
     }
 
     @Override
-    public void setPrefix(String prefix) {
+    public void setPrefix(final String prefix) {
         this.prefix = prefix;
     }
 
     @Override
-    public void setSuffix(String suffix) {
+    public void setSuffix(final String suffix) {
         this.suffix = suffix;
     }
 
     @Override
-    public String resolveRelativePath(String relativePath, String anchorPath) {
+    public String resolveRelativePath(final String relativePath, final String anchorPath) {
         return PathUtils.resolveRelativePath(relativePath, anchorPath, File.separatorChar);
     }
 
     @Override
-    public String createCacheKey(String templateName) {
+    public String createCacheKey(final String templateName) {
         return templateName;
     }
-
 
 }

@@ -18,17 +18,17 @@ import java.util.Map;
  */
 public class PebbleView extends AbstractTemplateView {
 
-    private PebbleEngine engine;
-    private String viewName;
+    private final PebbleEngine engine;
+    private final String viewName;
 
-    public PebbleView(PebbleEngine engine, String viewName) {
+    public PebbleView(final PebbleEngine engine, final String viewName) {
         this.engine = engine;
         this.viewName = viewName;
     }
 
     @Override
-    protected void renderMergedTemplateModel(Map<String, Object> model, HttpServletRequest request,
-                                             HttpServletResponse response) throws IOException, PebbleException {
+    protected void renderMergedTemplateModel(final Map<String, Object> model, final HttpServletRequest request,
+                                             final HttpServletResponse response) throws IOException, PebbleException {
 
         response.setContentType(getContentType());
         response.setCharacterEncoding("UTF-8");
@@ -39,7 +39,8 @@ public class PebbleView extends AbstractTemplateView {
         } finally {
             try {
                 writer.flush();
-            } catch (IOException ignore) {}
+            } catch (IOException ignore) {
+            }
         }
     }
 

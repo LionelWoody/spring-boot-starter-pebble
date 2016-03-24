@@ -27,7 +27,7 @@ public class PebbleEngineConfigurer {
 
     public PebbleEngine getPebbleEngine() {
 
-        PebbleEngine.Builder builder = new PebbleEngine.Builder()
+        final PebbleEngine.Builder builder = new PebbleEngine.Builder()
                 .loader(this.loader)
                 .extension(extensions.toArray(new Extension[extensions.size()]));
 
