@@ -21,9 +21,9 @@
         <cobertura.version>2.7</cobertura.version>
         <gpg.plugin.version>1.6</gpg.plugin.version>
         <release.plugin.version>2.5.3</release.plugin.version>
-        <surefire.plugin.version>2.19</surefire.plugin.version>
-        <compiler.plugin.version>3.3</compiler.plugin.version>
-        <source.plugin.version>2.4</source.plugin.version>
+        <surefire.plugin.version>2.19.1</surefire.plugin.version>
+        <compiler.plugin.version>3.5.1</compiler.plugin.version>
+        <source.plugin.version>3.0.0</source.plugin.version>
         <javadoc.plugin.version>2.10.3</javadoc.plugin.version>
         <nexus.staging.plugin.version>1.6.7</nexus.staging.plugin.version>
     </properties>
